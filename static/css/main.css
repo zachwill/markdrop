@@ -3,7 +3,7 @@
 ::selection{background:#be1a8d;color:#fff;text-shadow:-1px 1px 1px #7b115b;}
 body{min-height:800px;padding-top:40px;}
 .topbar a{color:#fff;}.topbar a:hover{background:#3875d7;}
-.topbar .fill{background-color:#2152a2;background-repeat:repeat-x;background-image:-khtml-gradient(linear, left top, left bottom, from(#255db7), to(#2152a2));background-image:-moz-linear-gradient(top, #255db7, #2152a2);background-image:-ms-linear-gradient(top, #255db7, #2152a2);background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #255db7), color-stop(100%, #2152a2));background-image:-webkit-linear-gradient(top, #255db7, #2152a2);background-image:-o-linear-gradient(top, #255db7, #2152a2);background-image:linear-gradient(top, #255db7, #2152a2);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#255db7', endColorstr='#2152a2', GradientType=0);}
+.topbar .fill{background:#255db7;background-color:#2152a2;background-repeat:repeat-x;background-image:-khtml-gradient(linear, left top, left bottom, from(#255db7), to(#2152a2));background-image:-moz-linear-gradient(top, #255db7, #2152a2);background-image:-ms-linear-gradient(top, #255db7, #2152a2);background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #255db7), color-stop(100%, #2152a2));background-image:-webkit-linear-gradient(top, #255db7, #2152a2);background-image:-o-linear-gradient(top, #255db7, #2152a2);background-image:linear-gradient(top, #255db7, #2152a2);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#255db7', endColorstr='#2152a2', GradientType=0);}
 .hero-unit{background:url(/static/img/article.png) #eeeeee no-repeat 110% 20%;}.hero-unit h1{font-weight:normal;}
 .hero-unit p{margin-top:10px;}
 .instructions{margin-top:75px;}
