@@ -1,6 +1,6 @@
 @import "bootstrap/mixins.less";
 
-@green: #8fc829;
+@blue: #3875d7;
 @pink: #be1a8d;
 
 /* Custom highlight */
@@ -11,6 +11,18 @@
 body{
     min-height: 800px;
     padding-top: 40px;
+}
+
+.topbar{
+    a{
+        color: #fff;
+        &:hover{
+            background: @blue;
+        }
+    }
+    .fill{
+        #gradient > .vertical(darken(@blue, 10%), darken(@blue, 15%));
+    }
 }
 
 .hero-unit{
