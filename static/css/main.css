@@ -4,7 +4,6 @@
 body{min-height:800px;padding-top:40px;}
 .hero-unit{background:url(/static/img/article.png) #eeeeee no-repeat 110% 20%;}.hero-unit h1{font-weight:normal;}
 .hero-unit p{margin-top:10px;}
-.about{margin-top:100px;}
 .instructions{margin-top:75px;}
 .screenshot{height:203px;margin-bottom:75px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.25);-moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.25);box-shadow:0 1px 3px rgba(0, 0, 0, 0.25);}.screenshot.drag{background:url(/static/img/drag.png) no-repeat center center;}
 .screenshot.drop{background:url(/static/img/drop.png) no-repeat center center;}

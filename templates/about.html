@@ -6,11 +6,32 @@
 
 
 {% block main %}
-<div class="container about">
-    <div class="page-header">
-        <h1>About</h1>
+<div class="container">
+  <div class="instructions">
+    <div class="hero-unit">
+      <h1>about</h1>
+      <p>How I made this site.</p>
     </div>
     <div class="row">
+      <div class="span-one-third">
+        <h3>Who?</h3>
+        <p>My name is Zach Williams. Here's a link to my
+        <a href="http://www.zachwill.com">personal website</a> and
+        <a href="http://twitter.com/zachwill">Twitter account</a>.</p>
+      </div>
+      <div class="span-one-third">
+        <h3>Inspiration</h3>
+        <p>This site wouldn't have been possible without
+        <a href="https://chrome.google.com/webstore/detail/jmchmkecamhbiokiopfpnfgbidieafmd">Markdown
+          Preview</a> and <a href="https://github.com/MrSwitch/dropfile">dropfile.js</a>.</p>
+      </div>
+      <div class="span-one-third">
+        <h3>Technology</h3>
+        <p>This is a simple <a href="http://flask.pocoo.org">Flask</a> site that runs on Heroku. It uses one
+        of my <a href="http://github.com/zachwill/flask_heroku">boilerplate templates</a>.</p>
+      </div>
     </div>
+  </div>
+  <div class="content"></div>
 </div>
 {% endblock %}
