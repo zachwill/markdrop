@@ -1,0 +1,22 @@
+.markdown{font-family:Georgia, Palatino, serif;margin:50px auto;}.markdown h1,.markdown h2,.markdown h3,.markdown h4{color:#111111;font-weight:400;}
+.markdown h1,.markdown h2,.markdown h3,.markdown h4,.markdown h5,.markdown p{margin-bottom:24px;padding:0;}
+.markdown h1{font-size:48px;}
+.markdown h2{font-size:36px;margin:24px 0 6px;}
+.markdown h3{font-size:24px;}
+.markdown h4{font-size:21px;}
+.markdown h5{font-size:18px;}
+.markdown a{color:#0099ff;margin:0;padding:0;vertical-align:baseline;}
+.markdown a:hover{text-decoration:none;color:#ff6600;}
+.markdown a:visited{color:purple;}
+.markdown ul,.markdown ol{padding:0;margin:0;}
+.markdown li{line-height:24px;}
+.markdown li ul,.markdown li ul{margin-left:24px;}
+.markdown p,.markdown ul,.markdown ol{font-size:16px;line-height:24px;max-width:540px;}
+.markdown pre{padding:0px 24px;max-width:800px;white-space:pre-wrap;}
+.markdown code{font-family:Consolas, Monaco, Andale Mono, monospace;line-height:1.5;font-size:13px;}
+.markdown aside{display:block;float:right;width:390px;}
+.markdown blockquote{border-left:.5em solid #eee;padding:0 2em;margin-left:0;max-width:476px;}
+.markdown blockquote cite{font-size:14px;line-height:20px;color:#bfbfbf;}
+.markdown blockquote cite:before{content:'\2014 \00A0';}
+.markdown blockquote p{color:#666;max-width:460px;}
+.markdown hr{width:540px;text-align:left;margin:0 auto 0 0;color:#999;}

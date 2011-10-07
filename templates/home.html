@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <section class="instructions">
+        <div class="hero-unit">
+            <h1>markdrop</h1>
+            <p>Because you love Markdown, and so do I.</p>
+        </div>
+        <div class="row">
+            <div class="span-one-third">
+                <h3>Markdown</h3>
+                <p><a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
+                is awesome. I use it everyday for the projects on my
+                <a href="http://github.com/zachwill">Github account</a>
+                and <a href="http://www.zachwill.com/blog/">blog posts</a>.</p>
+            </div>
+            <div class="span-one-third">
+                <h3>Problem</h3>
+                <p>Sometimes my formatting's a bit off, and I'd rather
+                not re-upload a file.</p>
+            </div>
+            <div class="span-one-third">
+                <h3>Solution</h3>
+                <p>I want to drag and drop my files to my browser and
+                see if my formatting looks right.</p>
+            </div>
+        </div>
+        <div class="page-header instructions">
+            <h2>Instructions <small>It only takes two steps</small></h2>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <h3>Drag</h3>
+                <p>Select the Markdown files you'd like to preview.</p>
+            </div>
+            <div class="span12 screenshot drag"></div>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <h3>Drop</h3>
+                <p>Drop them onto your browser window.</p>
+            </div>
+            <div class="span12 screenshot drop"></div>
+        </div>
+    </section>
+    <div class="content span14">
+    </div>
+</div>
+{% endblock %}
