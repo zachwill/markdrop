@@ -24,7 +24,7 @@ $(function() {
                     var name = files[i].name,
                         result = event.target.result,
                         html = content.html(),
-                        showdown = (new Showdown.converter()),
+                        showdown = new Showdown.converter(),
                         markdown,
                         final;
 
