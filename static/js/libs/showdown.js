@@ -6,6 +6,9 @@
 // Original Markdown Copyright (c) 2004-2005 John Gruber
 //   <http://daringfireball.net/projects/markdown/>
 //
+// Redistributable under a BSD-style open source license.
+// See license.txt for more information.
+//
 // The full source distribution is at:
 //
 //				A A L
@@ -48,7 +51,7 @@
 //
 //   var text = "Markdown *rocks*.";
 //
-//   var converter = new Attacklab.showdown.converter();
+//   var converter = new Showdown.converter();
 //   var html = converter.makeHtml(text);
 //
 //   alert(html);
@@ -59,14 +62,9 @@
 
 
 //
-// Attacklab namespace
-//
-var Attacklab = Attacklab || {}
-
-//
 // Showdown namespace
 //
-Attacklab.showdown = Attacklab.showdown || {}
+var Showdown = {};
 
 //
 // converter
@@ -74,7 +72,7 @@ Attacklab.showdown = Attacklab.showdown || {}
 // Wraps all "globals" so that the only thing
 // exposed is makeHtml().
 //
-Attacklab.showdown.converter = function() {
+Showdown.converter = function() {
 
 //
 // Globals:
@@ -152,6 +150,7 @@ this.makeHtml = function(text) {
 	return text;
 }
 
+
 var _StripLinkDefinitions = function(text) {
 //
 // Strips link definitions from text, stores the URLs and titles in
@@ -181,7 +180,7 @@ var _StripLinkDefinitions = function(text) {
 			  /gm,
 			  function(){...});
 	*/
-	var text = text.replace(/^[ ]{0,3}\[(.+)\]:[ \t]*\n?[ \t]*<?(\S+?)>?[ \t]*\n?[ \t]*(?:(\n*)["(](.+?)[")][ \t]*)?(?:\n+)/gm,
+	var text = text.replace(/^[ ]{0,3}\[(.+)\]:[ \t]*\n?[ \t]*<?(\S+?)>?[ \t]*\n?[ \t]*(?:(\n*)["(](.+?)[")][ \t]*)?(?:\n+|\Z)/gm,
 		function (wholeMatch,m1,m2,m3,m4) {
 			m1 = m1.toLowerCase();
 			g_urls[m1] = _EncodeAmpsAndAngles(m2);  // Link IDs are case-insensitive
@@ -200,6 +199,7 @@ var _StripLinkDefinitions = function(text) {
 
 	return text;
 }
+
 
 var _HashHTMLBlocks = function(text) {
 	// attacklab: Double up blank lines to reduce lookaround
@@ -351,10 +351,11 @@ var _RunBlockGamut = function(text) {
 	// Do Horizontal Rules:
 	var key = hashBlock("<hr />");
 	text = text.replace(/^[ ]{0,2}([ ]?\*[ ]?){3,}[ \t]*$/gm,key);
-	text = text.replace(/^[ ]{0,2}([ ]?-[ ]?){3,}[ \t]*$/gm,key);
-	text = text.replace(/^[ ]{0,2}([ ]?_[ ]?){3,}[ \t]*$/gm,key);
+	text = text.replace(/^[ ]{0,2}([ ]?\-[ ]?){3,}[ \t]*$/gm,key);
+	text = text.replace(/^[ ]{0,2}([ ]?\_[ ]?){3,}[ \t]*$/gm,key);
 
 	text = _DoLists(text);
+  text = _DoGithubCodeBlocks(text);
 	text = _DoCodeBlocks(text);
 	text = _DoBlockQuotes(text);
 
@@ -661,10 +662,10 @@ var _DoHeaders = function(text) {
 	//	--------
 	//
 	text = text.replace(/^(.+)[ \t]*\n=+[ \t]*\n+/gm,
-		function(wholeMatch,m1){return hashBlock("<h1>" + _RunSpanGamut(m1) + "</h1>");});
+		function(wholeMatch,m1){return hashBlock('<h1 id="' + headerId(m1) + '">' + _RunSpanGamut(m1) + "</h1>");});
 
 	text = text.replace(/^(.+)[ \t]*\n-+[ \t]*\n+/gm,
-		function(matchFound,m1){return hashBlock("<h2>" + _RunSpanGamut(m1) + "</h2>");});
+		function(matchFound,m1){return hashBlock('<h2 id="' + headerId(m1) + '">' + _RunSpanGamut(m1) + "</h2>");});
 
 	// atx-style headers:
 	//  # Header 1
@@ -688,9 +689,12 @@ var _DoHeaders = function(text) {
 	text = text.replace(/^(\#{1,6})[ \t]*(.+?)[ \t]*\#*\n+/gm,
 		function(wholeMatch,m1,m2) {
 			var h_level = m1.length;
-			return hashBlock("<h" + h_level + ">" + _RunSpanGamut(m2) + "</h" + h_level + ">");
+			return hashBlock("<h" + h_level + ' id="' + headerId(m2) + '">' + _RunSpanGamut(m2) + "</h" + h_level + ">");
 		});
 
+	function headerId(m) {
+		return m.replace(/[^\w]/g, '').toLowerCase();
+	}
 	return text;
 }
 
@@ -886,11 +890,47 @@ var _DoCodeBlocks = function(text) {
 	return text;
 }
 
+var _DoGithubCodeBlocks = function(text) {
+//
+//  Process Github-style code blocks
+//  Example:
+//  ```ruby
+//  def hello_world(x)
+//    puts "Hello, #{x}"
+//  end
+//  ```
+//  
+
+
+	// attacklab: sentinel workarounds for lack of \A and \Z, safari\khtml bug
+	text += "~0";
+	
+	text = text.replace(/\n```(.*)\n([^`]+)\n```/g,
+		function(wholeMatch,m1,m2) {
+			var language = m1;
+			var codeblock = m2;
+		
+			codeblock = _EncodeCode(codeblock);
+			codeblock = _Detab(codeblock);
+			codeblock = codeblock.replace(/^\n+/g,""); // trim leading newlines
+			codeblock = codeblock.replace(/\n+$/g,""); // trim trailing whitespace
+
+			codeblock = "<pre><code class='" + language + "'>" + codeblock + "\n</code></pre>";
+
+			return hashBlock(codeblock);
+		}
+	);
+
+	// attacklab: strip sentinel
+	text = text.replace(/~0/,"");
+
+	return text;
+}
+
 var hashBlock = function(text) {
 	text = text.replace(/(^\n+|\n+$)/g,"");
 	return "\n\n~K" + (g_html_blocks.push(text)-1) + "K\n\n";
 }
-
 
 var _DoCodeSpans = function(text) {
 //
@@ -943,7 +983,6 @@ var _DoCodeSpans = function(text) {
 	return text;
 }
 
-
 var _EncodeCode = function(text) {
 //
 // Encode/escape certain characters inside Markdown code runs.
@@ -978,7 +1017,7 @@ var _EncodeCode = function(text) {
 var _DoItalicsAndBold = function(text) {
 
 	// <strong> must go first:
-	text = text.replace(/(\*\*|__)(?=\S)([^\r]*?\S[\*_]*)\1/g,
+	text = text.replace(/(\*\*|__)(?=\S)([^\r]*?\S[*_]*)\1/g,
 		"<strong>$2</strong>");
 
 	text = text.replace(/(\*|_)(?=\S)([^\r]*?\S)\1/g,
@@ -1293,15 +1332,7 @@ var escapeCharacters_callback = function(wholeMatch,m1) {
 	return "~E"+charCodeToEscape+"E";
 }
 
-} // end of Attacklab.showdown.converter
+} // end of Showdown.converter
 
-
-// Version 0.9 used the Showdown namespace instead of Attacklab.showdown
-// The old namespace is deprecated, but we'll support it for now:
-var Showdown = Attacklab.showdown;
-
-// If anyone's interested, tell the world that this file's been loaded
-if (Attacklab.fileLoaded) {
-	Attacklab.fileLoaded("showdown.js");
-}
-
+// export
+if (typeof exports != 'undefined') exports.Showdown = Showdown;
