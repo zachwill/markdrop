@@ -7,6 +7,7 @@ $(function() {
             instructions = $('.instructions');
 
         instructions.remove();
+        content.find('.markdown').remove();
 
         e = (e && e.originalEvent ? e.originalEvent : window.event) || e;
 
