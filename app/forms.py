@@ -1,7 +1,7 @@
 """
-WTForms Documentation:    http://wtforms.simplecodes.com/
+WTForms Documentation:    http://wtforms.readthedocs.org/en/latest/
 Flask WTForms Patterns:   http://flask.pocoo.org/docs/patterns/wtforms/
-Flask-WTF Documentation:  http://packages.python.org/Flask-WTF/
+Flask-WTF Documentation:  https://flask-wtf.readthedocs.org/en/latest/
 
 Forms for your application can be stored in this file.
 """
